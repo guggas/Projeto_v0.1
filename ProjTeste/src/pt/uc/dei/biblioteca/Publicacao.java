@@ -10,7 +10,6 @@ public class Publicacao {
 	private boolean disponivel;
 	private String id;
 	private String titulo;
-//	private Calendar dataRec;
 	private ArrayList<Area> areas;
 
 	public Publicacao(String titulo, Date dataPub, String descricao, String id, ArrayList<Area> areas) {
