@@ -14,46 +14,46 @@ import java.util.StringTokenizer;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.JTextPane;
 
-public class PainelLogin extends JPanel {
+public class PainelLogin extends JPanel{//  implements ActionListener {
 
 	/**
 	 * 
 	 */
 	
+	private MainWindowV2 app;
 	private JTextField caixaTextoUser;
 	private JPasswordField passField;
+	private boolean entrou;
+//	private String tipo;
 
 	/**
 	 * Create the panel.
 	 */
-	public PainelLogin() {
-
+	public PainelLogin(MainWindowV2 app) {
+		
+		this.app = app;
+		
 		setBackground(Color.WHITE);
 		setLayout(null);
 
 		caixaTextoUser = new JTextField();
 		caixaTextoUser.setColumns(10);
-		caixaTextoUser.setBounds(196, 103, 145, 20);
+		caixaTextoUser.setBounds(279, 104, 145, 20);
 		add(caixaTextoUser);
 
 		JLabel labelUser = new JLabel("username");
-		labelUser.setBounds(97, 106, 106, 14);
+		labelUser.setBounds(210, 107, 62, 14);
 		add(labelUser);
 
 		JLabel labelPass = new JLabel("password");
-		labelPass.setBounds(97, 131, 76, 14);
+		labelPass.setBounds(210, 138, 62, 14);
 		add(labelPass);
 
 		passField = new JPasswordField();
-		passField.setBounds(196, 134, 145, 20);
+		passField.setBounds(279, 135, 145, 20);
 		add(passField);
-
-		JLabel lblBemvindo = new JLabel("Bem-Vindo!");
-		lblBemvindo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBemvindo.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblBemvindo.setBounds(153, 36, 131, 41);
-		add(lblBemvindo);
 
 		// .txt com dados de utilizadores
 
@@ -74,11 +74,12 @@ public class PainelLogin extends JPanel {
 		// }
 		//
 
-		// Botoes Ok e Sair
+		// Botao Ok 
 		JButton btnOkLogin = new JButton("Ok");
 		btnOkLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
+				
 				try {
 					loginInfo.abreLeitura("loginUtilizadores.txt");
 
@@ -89,16 +90,17 @@ public class PainelLogin extends JPanel {
 					String tipo = ""; // tipo de utilizador para direcionar janelas
 
 					String userInt = caixaTextoUser.getText();
-					char[] passInt = passField.getPassword(); 
+					String passInt = passField.getText(); 
 //					passInt.toString();
 
 //					// Le cada linha
-//					boolean continua = true;
-				
-					while (loginInfo.leLinha() != null) {
+					
+					 entrou = false;
+					 String linha = "";
+					while ((linha=loginInfo.leLinha()) != null) {
 
-						StringTokenizer divisor = new StringTokenizer(loginInfo.leLinha());
-						System.out.println(divisor);
+						StringTokenizer divisor = new StringTokenizer(linha);
+				
 						while (divisor.hasMoreElements()) {
 							user = divisor.nextToken();
 							pass = divisor.nextToken();
@@ -107,27 +109,23 @@ public class PainelLogin extends JPanel {
 						}
 
 						// Verificacao do login
-						if (userInt.equals(user) && passInt.equals(pass) && tipo.equals("1")) {
-							JOptionPane.showMessageDialog(null, "Entrou");
-							// PainelBiblitecario .....
+						if (userInt.equals(user) && passInt.equals(pass) ){//&& tipo.equals("1")) {
+							JOptionPane.showMessageDialog(null, "Entrou");							
+							entrou = true;
+							app.direcionaUtilizador(tipo);
 						}
-						else if (userInt.equals(user) && passInt.equals(pass) && tipo.equals("2")) {
-							JOptionPane.showMessageDialog(null, "Entrou");
-							// PainelColaborador .....
-						}
-						else if (userInt.equals(user) && passInt.equals(pass) && tipo.equals("3")) {
-							JOptionPane.showMessageDialog(null, "Entrou");
-							// PainelLeitor .....
-						}
-						else if (userInt.equals("") || passInt.equals("")) {
+					}
+
+					if(entrou == false){
+						if (userInt.equals("") || passInt.equals("")) {
 							JOptionPane.showMessageDialog(null, "Por favor, preencha ambos os campos");
 							
 						} 
 						else {
-							JOptionPane.showMessageDialog(null, "Username ou password incorretos!");
-							caixaTextoUser.setText("");
-							passField.setText("");
-//							labelUser.requestFocus();  ---> ver melhor: foco no campo a verificar
+						JOptionPane.showMessageDialog(null, "Username ou password incorretos!");
+						caixaTextoUser.setText("");
+						passField.setText("");
+//						labelUser.requestFocus();  ---> ver melhor: foco no campo a verificar
 						}
 					}
 
@@ -149,10 +147,18 @@ public class PainelLogin extends JPanel {
 			          d.printStackTrace();
 			        }
 			}
+			
+			
 		});
 
-		btnOkLogin.setBounds(187, 200, 89, 23);
+		btnOkLogin.setBounds(313, 214, 89, 23);
 		add(btnOkLogin);
+		
+		JTextPane txtTextoBV = new JTextPane();
+		txtTextoBV.setFont(new Font("Monotype Corsiva", Font.PLAIN, 14));
+		txtTextoBV.setText("\"No Egito, as bibliotecas eram chamadas de 'tesouro dos rem\u00E9dios da alma'.\r\nDe facto, nelas se curava a ignor\u00E2ncia, a mais perigosa das enfermidades e a origem de todas as outras.\"\r\n\r\nJaques Benigno Bossuet");
+		txtTextoBV.setBounds(30, 56, 141, 181);
+		add(txtTextoBV);
 
 	}
 }
