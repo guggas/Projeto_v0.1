@@ -134,39 +134,57 @@ public class AnaliseEstatistica {
 	
 	/*
 	 * Procura na lista de requisicoes, o maxTempRequicao (é mais rápida que organizar o arraylist)
+	 * Usa calendar DAY_OF_YEAR. Não prevê anos bissextos. Começa com 0.
 	 */
 	public int maxTempReqPublicacao(Publicacao p){
 		ArrayList<Requisicao> r=new ArrayList<Requisicao>();
-		r=reqPublicacao(p);
-		int tempo=r.get(0).getDataDevolvido().compareTo(r.get(0).getDataRequisicao());
+		r=reqPublicacao(p); 	//lista de requisicoes da publicacao: ArrayList
+		int tempo=0;
 		for (Requisicao req: r) {
-			if (req.getDataDevolvido().compareTo(req.getDataRequisicao())>tempo) tempo=req.getDataDevolvido().compareTo(req.getDataRequisicao());
+			int anoDev=req.getDataDevolvido().get(Calendar.YEAR);
+			int anoReq=req.getDataRequisicao().get(Calendar.YEAR);
+			int diaDev=req.getDataDevolucao().get(Calendar.DAY_OF_YEAR);
+			int diaReq=req.getDataRequisicao().get(Calendar.YEAR);
+			if ((anoDev-anoReq)*365+diaDev-diaReq>tempo) tempo=(anoDev-anoReq)*365+diaDev-diaReq;
 		}
 		return tempo;
 	}
 	
 	/*
 	 * Procura na lista de requisicoes, o minTempRequicao (é mais rápida que organizar o arraylist)
+	 * Usa calendar DAY_OF_YEAR. Não prevê anos bissextos. Começa com a primeira requisicao.
 	 */
 	public int minTempReqPublicacao(Publicacao p){
 		ArrayList<Requisicao> r=new ArrayList<Requisicao>();
-		r=reqPublicacao(p);
-		int tempo=r.get(0).getDataDevolvido().compareTo(r.get(0).getDataRequisicao());
+		r=reqPublicacao(p);		//lista de requisicoes da publicacao: ArrayList
+		int anoDev=r.get(0).getDataDevolvido().get(Calendar.YEAR);
+		int anoReq=r.get(0).getDataRequisicao().get(Calendar.YEAR);
+		int diaDev=r.get(0).getDataDevolucao().get(Calendar.DAY_OF_YEAR);
+		int diaReq=r.get(0).getDataRequisicao().get(Calendar.YEAR);
+		int tempo=(anoDev-anoReq)*365+diaDev-diaReq;
 		for (Requisicao req: r) {
-			if (req.getDataDevolvido().compareTo(req.getDataRequisicao())<tempo) tempo=req.getDataDevolvido().compareTo(req.getDataRequisicao());
+			if ((req.getDataDevolvido().get(Calendar.YEAR)-req.getDataRequisicao().get(Calendar.YEAR))*365+
+					req.getDataDevolucao().get(Calendar.DAY_OF_YEAR)-req.getDataRequisicao().get(Calendar.DAY_OF_YEAR)<tempo) tempo=
+					(req.getDataDevolvido().get(Calendar.YEAR)-req.getDataRequisicao().get(Calendar.YEAR))*365+
+					req.getDataDevolucao().get(Calendar.DAY_OF_YEAR)-req.getDataRequisicao().get(Calendar.DAY_OF_YEAR);
 		}
 		return tempo;
 	}
 	
 	/*
-	 * Calcula o tempo médio de um empréstimo.
+	 * Calcula o tempo médio de um empréstimo. Usa calendar DAY_OF_YEAR. Não prevê anos bissextos.
 	 */
 	public int medTempReqPublicacao(Publicacao p){
 		ArrayList<Requisicao> r=new ArrayList<Requisicao>();
 		r=reqPublicacao(p);
 		int tempo=0;
 		for (Requisicao req: r) {
-			tempo+=req.getDataDevolvido().compareTo(req.getDataRequisicao());
+			int anoReq=req.getDataRequisicao().get(Calendar.YEAR);
+			int diaReq=req.getDataRequisicao().get(Calendar.DAY_OF_YEAR);
+			int anoDev=req.getDataDevolvido().get(Calendar.YEAR);
+			int diaDev=req.getDataDevolvido().get(Calendar.DAY_OF_YEAR);
+			int dias=(anoDev-anoReq)*365+diaDev-diaReq;
+			tempo+=dias;
 		}
 		return tempo;
 	}
