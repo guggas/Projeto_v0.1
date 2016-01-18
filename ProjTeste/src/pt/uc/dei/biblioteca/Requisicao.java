@@ -9,16 +9,16 @@ public class Requisicao {
 	private GregorianCalendar dataDevolvido;		// = dataRequisicao-1dia;
 	private GregorianCalendar dataRequisicao;
 	private Utilizador leitor;
-	private Publicacao publicacao;
+	private Requisitavel publicacao;
 	private GregorianCalendar dataDevolucao;
 
-	public Requisicao(Utilizador leitor, Publicacao publicacao) {
+	public Requisicao(Utilizador leitor, Requisitavel publicacao) {
 		
 		this.leitor = leitor;
 		this.publicacao = publicacao;
 		dataRequisicao = new GregorianCalendar();
 		dataDevolucao = (GregorianCalendar) dataRequisicao.clone();
-		
+
 		dataDevolucao.add(Calendar.DAY_OF_YEAR, publicacao.getDiasReq());
 		
 //		dataDevolucao --> em funcao de publicacao.getMaxDiasRequisicao();

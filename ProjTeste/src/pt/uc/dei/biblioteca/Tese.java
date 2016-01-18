@@ -3,14 +3,14 @@ package pt.uc.dei.biblioteca;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Tese extends NaoPeriodica {
+public class Tese extends NaoPeriodica implements Requisitavel {
 
 	private String autor;
 	private String orientador;
 	private boolean mestrado;
 	private final boolean requisitavel = true;
 	private int codBarras;
-	private int diasReq; 						//numero de dias máx de requisicao
+	private int diasReq=5; 						//numero de dias máx de requisicao
 
 	public Tese(String titulo, String autor, Date dataPub, String descricao, String id, ArrayList<Area> areas, String orientador, boolean mestrado, int codBarras) {
 	
@@ -40,6 +40,10 @@ public class Tese extends NaoPeriodica {
 	
 	public boolean getRequisitavel() {
 		return requisitavel;
+	}
+
+	public int getDiasReq() {
+		return diasReq;
 	}
 	
 }

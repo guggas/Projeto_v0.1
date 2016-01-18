@@ -3,13 +3,13 @@ package pt.uc.dei.biblioteca;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Revista extends Periodica {
+public class Revista extends Periodica implements Requisitavel {
 
 	private String volume;
 	private String numero;
 	private final boolean requisitavel = true;
 	private int codBarras;
-	private int diasReq;
+	private int diasReq=2;
 
 	public Revista(String titulo, Date dataPub, String descricao, String id, ArrayList<Area> areas, String periodicidade, String volume, String numero, int codBarras) {
 		super(titulo, dataPub, descricao, id, areas, periodicidade);
@@ -33,6 +33,11 @@ public class Revista extends Periodica {
 	
 	public boolean getRequisitavel() {
 		return requisitavel;
+	}
+
+	@Override
+	public int getDiasReq() {
+		return diasReq;
 	}
 
 }

@@ -3,7 +3,7 @@ package pt.uc.dei.biblioteca;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Livro extends NaoPeriodica {
+public class Livro extends NaoPeriodica implements Requisitavel {
 
 	private ArrayList <String> autores;
 	private final String isbn;
@@ -11,6 +11,7 @@ public class Livro extends NaoPeriodica {
 	private String editor;
 	private final boolean requisitavel = true;
 	private int codBarras;
+	private int diasReq=10;
 
 	public Livro(String titulo, ArrayList<String> autores, Date dataPub, String descricao, String id, ArrayList<Area> areas, String isbn, String edicao, String editor, int codBarras) {
 		super(titulo, dataPub, descricao, id, areas);
@@ -44,6 +45,11 @@ public class Livro extends NaoPeriodica {
 	
 	public boolean getRequisitavel() {
 		return requisitavel;
+	}
+
+	@Override
+	public int getDiasReq() {
+		return diasReq;
 	}
 
 }
