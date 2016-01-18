@@ -11,7 +11,8 @@ public class Biblioteca {
 	private ArrayList <Requisicao> requisicoes;	//alteracao permitida? !!!!!!
 	private ArrayList<Utilizador> utilizadores;
 	private ArrayList<Publicacao> publicacoes;
-
+	private int countUtilizador;
+	
 	public Biblioteca() {	
 		
 		this.areas = new ArrayList<Area>();
@@ -28,20 +29,24 @@ public class Biblioteca {
 		this.requisicoes = new ArrayList <Requisicao> ();	
 		this.utilizadores = new  ArrayList<Utilizador> ();
 		this.publicacoes = new ArrayList<Publicacao>();
+		
+		this.countUtilizador = 0;
 	}
 
 	public ArrayList <Requisicao> getObrasRequisitadas() {
 		return requisicoes;
 	}
 
-	public void addArea(Area novaArea) {
+	public boolean addArea(Area novaArea) {
 		
 		Area area = findArea (novaArea);
 		
 		if (area==null){
 			areas.add(novaArea);
+			return true;
 		}
 		else System.out.println("Tema já registado na Base de Dados");
+		return false;
 	}
 
 	private Area findArea(Area novaArea) {
@@ -55,43 +60,63 @@ public class Biblioteca {
 		return null;
 	}
 
-	public void addUtilizador(Utilizador novoUtilizador) {
+	public int addUtilizador(Utilizador novoUtilizador) {
 		
-		Utilizador util = findUtilizador (novoUtilizador);
-		
-		if (util == null){
-			
-			utilizadores.add(novoUtilizador);
-			System.out.println("Utilizador registado com sucesso!");
-		}
-		
-	}
-
-	private Utilizador findUtilizador(Utilizador novoUtilizador) {
+//		Utilizador util = findUtilizador (novoUtilizador);
+		int msg = 0;
 		
 		for (Utilizador u : utilizadores){
 			
 			if (novoUtilizador.getNum()==u.getNum()){
 				System.out.println("Número de utilizador já registado!");
-				return u;
+				msg = 1;
 			}
 			else if (novoUtilizador.getUser().equals(u.getUser())){
 				System.out.println("Nome de utilizador já registado!");
-				return u;
+				msg = 2;
 			}
-			
+			else{
+				utilizadores.add(novoUtilizador);
+				System.out.println("Utilizador registado com sucesso!");
+				countUtilizador++;
+			}
 		}
-		return null;
+		
+		return msg;
 	}
 
-	public void addRequisicao (Requisicao novaReq){
+	
+	public int getCountUtilizador(){
+		return countUtilizador;
+	}
+//	private Utilizador findUtilizador(Utilizador novoUtilizador) {
+//		
+//		for (Utilizador u : utilizadores){
+//			
+//			if (novoUtilizador.getNum()==u.getNum()){
+//				System.out.println("Número de utilizador já registado!");
+//				return u;
+//			}
+//			else if (novoUtilizador.getUser().equals(u.getUser())){
+//				System.out.println("Nome de utilizador já registado!");
+//				return u;
+//			}
+//			
+//		}
+//		return null;
+//	}
+
+	public boolean addRequisicao (Requisicao novaReq){
 		
 		Requisicao req = findRequisicao (novaReq);
 		
 		if (req == null){
 			requisicoes.add(novaReq);
 			System.out.println("Requisição registada");
+			return true;
 		}
+		
+		return false;
 	}
 	
 	private Requisicao findRequisicao(Requisicao novaReq) {
@@ -99,22 +124,23 @@ public class Biblioteca {
 		for (Requisicao req : requisicoes){
 			
 			if(req.equals(novaReq)){
-				System.out.println("Requisicao ja registada"); //necessario apenas para efeitos de teste
+//				System.out.println("Requisicao ja registada"); //necessario apenas para efeitos de teste
 				return req;
 			}
 		}
 		return null;
 	}
 	
-	public void addPublicacao (Publicacao novaPublicacao){
+	public boolean addPublicacao (Publicacao novaPublicacao){
 		
 		Publicacao pub = findPublicacao (novaPublicacao);
 		
 		if (pub == null){
 			publicacoes.add(novaPublicacao); // --> ADICAO EM AREAS??
 			System.out.println("Publicacao registada");
+			return true;
 		}
-	
+		return false;
 	}
 	
 	private Publicacao findPublicacao(Publicacao novaPublicacao) {
