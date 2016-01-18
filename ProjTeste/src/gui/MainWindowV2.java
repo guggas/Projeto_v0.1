@@ -22,8 +22,10 @@ import java.awt.Rectangle;
 
 public class MainWindowV2 {
 
-	private JFrame janelaGeralV2;
-	private JTabbedPane painelTabs;
+//	Biblioteca biblioteca;
+	
+	 JFrame janelaGeralV2;
+	 JTabbedPane painelTabs;
 
 	
 	//Tabs
@@ -75,8 +77,8 @@ public class MainWindowV2 {
 		// Definicao do layout da janela principal
 		
 		setJanelaGeralV2(new JFrame());
-		getJanelaGeralV2().setBounds(new Rectangle(500, 500, 500, 500));
-		getJanelaGeralV2().setTitle("\u00C0 volta dos livros");
+		getJanelaGeralV2().setBounds(new Rectangle(700, 700, 700, 700));
+		getJanelaGeralV2().setTitle("À volta dos livros");
 		getJanelaGeralV2().setResizable(false);
 		getJanelaGeralV2().setBounds(100, 100, 509, 366);
 		getJanelaGeralV2().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,6 +94,10 @@ public class MainWindowV2 {
 		//Tab Login
 		PainelLogin pLogin = new PainelLogin(this);
 		painelTabs.addTab("Login", null, pLogin, null);
+//		PainelLogin pLogin = new PainelLogin(this);			//««««««««»»»»»»»»»»»»
+//		janelaGeralV2.getContentPane().add(pLogin);
+//		janelaGeralV2.validate();
+//		janelaGeralV2.setVisible(true);
 		
 //		//Tab Entrada
 		this.pEntrada = new PainelEntrada();
@@ -136,6 +142,7 @@ public class MainWindowV2 {
 		
 		
 		if (tipo.equals("1")){
+//			getJanelaGeralV2().getContentPane().add(painelTabs);
 			this.painelTabs.removeAll();
 			this.painelTabs.addTab("Login: Bibliotecário Chefe ", null, pEntrada, null);
 			this.painelTabs.addTab("Utilizadores", null, panelUtilBack, null);
@@ -147,12 +154,14 @@ public class MainWindowV2 {
 		}
 		else if (tipo.equals("2")){
 			this.painelTabs.removeAll();
+//			getJanelaGeralV2().getContentPane().add(painelTabs);
 			this.painelTabs.addTab("Login ", null, pEntrada, null);
 			this.painelTabs.addTab("Requisi\u00E7\u00F5es", null, panelRequisicoes, null);
 			
 		}
 		else if (tipo.equals("3")){
 			this.painelTabs.removeAll();
+//			getJanelaGeralV2().getContentPane().add(painelTabs);
 			this.painelTabs.addTab("Login: Leitor", null, pEntrada, null);		//A COLOCAR NOME DO LEITOR ?
 			this.painelTabs.addTab("Lista de Publicações", null, panelPublicacoes, null);
 			this.painelTabs.addTab("Pesquisar obra", null, panelPesquisarObra , null);
@@ -176,4 +185,5 @@ public class MainWindowV2 {
 	}
 	
 }
+
 
