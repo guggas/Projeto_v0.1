@@ -3,7 +3,7 @@ package pt.uc.dei.biblioteca;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class NaoPeriodica extends Publicacao {
+public abstract class NaoPeriodica extends Publicacao {
 
 	private final boolean requisitavel = true;
 

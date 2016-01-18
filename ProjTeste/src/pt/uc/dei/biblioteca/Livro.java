@@ -19,6 +19,7 @@ public class Livro extends NaoPeriodica {
 		this.editor=editor;
 		this.codBarras=codBarras;
 		this.autores=autores;
+		
 	}
 
 	public ArrayList <String> getAutores() {
