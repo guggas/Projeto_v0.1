@@ -3,7 +3,7 @@ package pt.uc.dei.biblioteca;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Publicacao {
+public abstract class Publicacao {
 
 	private Date dataPub;
 	private String descricao;

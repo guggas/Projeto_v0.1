@@ -3,7 +3,7 @@ package pt.uc.dei.biblioteca;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Periodica extends Publicacao {
+public abstract class Periodica extends Publicacao {
 
 	private String periodicidade; //Hipóteses válidas=Diária, Semanal, Quinzenal, Mensal, Trimestral, Semestral ou Anual
 

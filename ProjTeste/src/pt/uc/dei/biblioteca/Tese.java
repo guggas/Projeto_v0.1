@@ -10,6 +10,7 @@ public class Tese extends NaoPeriodica {
 	private boolean mestrado;
 	private final boolean requisitavel = true;
 	private int codBarras;
+	private int diasReq; 						//numero de dias máx de requisicao
 
 	public Tese(String titulo, String autor, Date dataPub, String descricao, String id, ArrayList<Area> areas, String orientador, boolean mestrado, int codBarras) {
 	
@@ -17,6 +18,7 @@ public class Tese extends NaoPeriodica {
 		this.autor=autor;
 		this.orientador=orientador;
 		this.codBarras=codBarras;
+		
 	}
 	
 	public String getAutor() {
@@ -39,5 +41,5 @@ public class Tese extends NaoPeriodica {
 	public boolean getRequisitavel() {
 		return requisitavel;
 	}
-
+	
 }
